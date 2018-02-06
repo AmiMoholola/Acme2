@@ -1,0 +1,36 @@
+﻿@model AcmeFrontEnd.Models.EmployeeModel
+
+@{
+    ViewBag.Title = "Terminate";
+}
+
+<hgroup class="title">
+    <h1>Terminate Employee</h1>
+</hgroup>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Registration Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(model => model.TerminatedDate)
+                @Html.TextBoxFor(model => model.TerminatedDate,new {@class = "datafield", type = "date"})
+            </li>
+            <li>
+                @Html.HiddenFor(model => model.Personid)
+            </li>
+                
+                
+            
+            
+        </ol>
+        <input type="submit" value="Terminate Employee" />
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<AcmeFrontEnd.Models.PersonModel>
+@{
+    ViewBag.Title = "Home Page";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+        </div>
+    </section>
+}
+<h3>Employee List:</h3>
+
+<ul>
+
+     @foreach (var item in Model)
+    
+     {
+         
+    <li>
+        <h5>@Html.DisplayFor(model => item.Firstname) &nbsp; @Html.DisplayFor(model => item.Lastname)</h5>
+        @Html.ActionLink("Edit", "ShowSinglePerson","Account", new {id = item.Personid}, null) &nbsp;@Html.ActionLink("Delete", "DeletePerson","Account", new {id = item.Personid}, null) &nbsp;
+        @Html.ActionLink("Terminate", "Terminate","Account", new {id = item.Personid}, null)
+    </li>
+
+     }
+</ul>

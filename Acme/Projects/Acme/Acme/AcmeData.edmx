@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AcmeModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="AcmeModelStoreContainer">
+          <EntitySet Name="Employee" EntityType="AcmeModel.Store.Employee" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Person" EntityType="AcmeModel.Store.Person" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Employee_Person" Association="AcmeModel.Store.FK_Employee_Person">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Employee1" EntitySet="Employee" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="EmployeeNum" Type="nchar" Nullable="false" MaxLength="16" />
+          <Property Name="EmployedDate" Type="date" Nullable="false" />
+          <Property Name="TerminatedDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="BirthDate" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Employee_Person">
+          <End Role="Employee" Type="AcmeModel.Store.Employee" Multiplicity="1" />
+          <End Role="Employee1" Type="AcmeModel.Store.Employee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AcmeModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AcmeEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees" EntityType="AcmeModel.Employee" />
+          <EntitySet Name="People" EntityType="AcmeModel.Person" />
+          <AssociationSet Name="FK_Employee_Person" Association="AcmeModel.FK_Employee_Person">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Employee1" EntitySet="Employees" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeNum" Type="String" Nullable="false" MaxLength="16" Unicode="true" FixedLength="true" />
+          <Property Name="EmployedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TerminatedDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <Association Name="FK_Employee_Person">
+          <End Role="Employee" Type="AcmeModel.Employee" Multiplicity="1" />
+          <End Role="Employee1" Type="AcmeModel.Employee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AcmeModelStoreContainer" CdmEntityContainer="AcmeEntities">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="AcmeModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="EmployeeNum" ColumnName="EmployeeNum" />
+                <ScalarProperty Name="EmployedDate" ColumnName="EmployedDate" />
+                <ScalarProperty Name="TerminatedDate" ColumnName="TerminatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="AcmeModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

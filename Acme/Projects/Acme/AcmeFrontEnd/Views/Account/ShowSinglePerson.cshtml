@@ -1,0 +1,40 @@
+﻿@model AcmeFrontEnd.Models.PersonModel
+
+@{
+    ViewBag.Title = "Update Employee";
+}
+
+<hgroup class="title">
+    <h1>Update Employee</h1>
+</hgroup>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Registration Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(model => model.Firstname)
+                @Html.TextBoxFor(model => model.Firstname)
+            </li>   
+             <li>
+                @Html.LabelFor(model => model.Lastname)
+                @Html.TextBoxFor(model => model.Lastname)
+            </li>
+            <li>
+                @Html.LabelFor(model => model.Birthdate)
+                @Html.TextBoxFor(model => model.Birthdate, new { @readonly="readonly"})
+            </li>
+            <li>
+                @Html.HiddenFor(model => model.Personid)
+            </li>
+        </ol>
+        <input type="submit" value="Upadate Employee" />
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AcmeModelStoreContainer" CdmEntityContainer="AcmeEntities">
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="AcmeModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="EmployeeNum" ColumnName="EmployeeNum" />
+          <ScalarProperty Name="EmployedDate" ColumnName="EmployedDate" />
+          <ScalarProperty Name="TerminatedDate" ColumnName="TerminatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="People">
+      <EntityTypeMapping TypeName="AcmeModel.Person">
+        <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

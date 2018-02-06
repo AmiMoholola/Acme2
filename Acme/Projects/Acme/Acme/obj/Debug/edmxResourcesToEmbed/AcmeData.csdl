@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AcmeModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="AcmeEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Employees" EntityType="AcmeModel.Employee" />
+    <EntitySet Name="People" EntityType="AcmeModel.Person" />
+    <AssociationSet Name="FK_Employee_Person" Association="AcmeModel.FK_Employee_Person">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Employee1" EntitySet="Employees" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonId" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeNum" Type="String" Nullable="false" MaxLength="16" Unicode="true" FixedLength="true" />
+    <Property Name="EmployedDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="TerminatedDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="PersonId" />
+    </Key>
+    <Property Name="PersonId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <Association Name="FK_Employee_Person">
+    <End Role="Employee" Type="AcmeModel.Employee" Multiplicity="1" />
+    <End Role="Employee1" Type="AcmeModel.Employee" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="Employee1">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,40 @@
+﻿@model AcmeFrontEnd.Models.PersonModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<hgroup class="title">
+    <h1>Add New Employee</h1>
+</hgroup>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Registration Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.Firstname)
+                @Html.TextBoxFor(m => m.Firstname)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Lastname)
+                @Html.TextBoxFor(m => m.Lastname)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Birthdate)
+                @Html.TextBoxFor(m => m.Birthdate, new {@class = "datafield", type = "date"})
+            </li>
+            
+        </ol>
+
+
+       
+        <input type="submit" value="Add Employee" />
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
